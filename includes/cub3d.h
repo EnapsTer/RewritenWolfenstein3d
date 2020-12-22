@@ -35,4 +35,6 @@ void	init_keys(t_keys *keys);
 BOOL is_passable(char c);//delete
 
 void	send_error(char *str);
+
+BOOL	is_xpm(char	*path);
 #endif

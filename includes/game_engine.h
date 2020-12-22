@@ -22,7 +22,7 @@
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
 # define MOVE_SPEED 0.1
-# define ROT_SPEED 0.05w
+# define ROT_SPEED 0.05
 
 typedef struct  s_data
 {
@@ -44,6 +44,7 @@ typedef struct	s_d_vector
 	double			x;
 	double			y;
 }				t_d_vector;
+
 
 typedef struct	s_ray
 {
@@ -105,6 +106,18 @@ typedef struct	s_textures
 	t_texture	we;
 }				t_textures;
 
+typedef struct	s_sprite
+{
+	t_d_vector	pos;
+}				t_sprite;
+
+typedef struct	s_sprites
+{
+	t_sprite	*sprite_arr;
+	int			sprites_count;
+	t_texture	texture;
+}				t_sprites;
+
 typedef struct	s_game
 {
 	t_keys		keys;
@@ -113,6 +126,7 @@ typedef struct	s_game
 	t_player	player;
 	t_ray		ray;
 	t_textures	textures;
+	t_sprites	sprites;
 }				t_game;
 
 BOOL handle_pressed_key(int key, t_game *game);
@@ -134,4 +148,6 @@ void init_textures(t_textures *textures, t_config config, t_mlx *mlx);
 void		get_texture_data(t_texture *texture, t_ray ray, t_player player, t_config config);
 
 t_texture	*select_texture(t_textures *textures, t_ray ray, t_player player);
+
+void	init_sprites(t_sprites *sprites, t_config config, void *mlx);
 #endif

@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void calc_for_render(t_ray *ray, t_player *player, t_config config)
+void		calc_for_render(t_ray *ray, t_player *player, t_config config)
 {
 	double	temp;
 

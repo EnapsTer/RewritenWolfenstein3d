@@ -14,7 +14,7 @@
 
 void	init_keys(t_keys *keys)
 {
-	keys->w = 1;
+	keys->w = 0;
 	keys->s = 0;
 	keys->a = 0;
 	keys->d = 0;

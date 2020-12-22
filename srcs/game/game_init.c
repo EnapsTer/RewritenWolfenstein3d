@@ -44,6 +44,7 @@ BOOL		game_init(t_config config)
 	init_keys(&game.keys);
 	init_player(&game.player, game.config);
 	init_textures(&game.textures, config, &game.mlx);
+	init_sprites(&game.sprites, config, game.mlx.mlx);
 
 	mlx_do_key_autorepeatoff(game.mlx.mlx);
 	mlx_hook(game.mlx.win, 2, 0, handle_pressed_key, &game);

@@ -12,6 +12,21 @@
 
 #include "cub3d.h"
 #include "stdio.h"
+#include "libft.h"
+
+BOOL	is_xpm(char	*path)
+{
+	int i;
+
+	i = 0;
+	while (i < (int)ft_strlen(path))
+	{
+		if (ft_strcmp(path + i, ".xpm") == 0)
+			return (TRUE);
+		i++;
+	}
+	return (FALSE);
+}
 
 void	send_error(char *str)
 {

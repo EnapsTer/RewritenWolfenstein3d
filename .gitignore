@@ -3,6 +3,7 @@
 
 .DS_STORE
 .idea/
+temp*
 
 # Object files
 *.o

@@ -14,20 +14,6 @@
 #include "libft.h"
 #include "mlx.h"
 
-BOOL	is_xpm(char	*path)
-{
-	int i;
-
-	i = 0;
-	while (i < (int)ft_strlen(path))
-	{
-		if (ft_strcmp(path + i, ".xpm") == 0)
-			return (TRUE);
-		i++;
-	}
-	return (FALSE);
-}
-
 void	init_texture(t_texture *texture, void *mlx)
 {
 	texture->img.img = mlx_xpm_file_to_image(mlx, texture->path,
