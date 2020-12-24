@@ -12,6 +12,10 @@
 
 #ifndef GAME_ENGINE_H
 #define GAME_ENGINE_H
+# define ERROR -1
+# define TRUE 1
+# define FALSE 0
+# define BOOL int
 # define ESC 53
 # define KEY_W 13
 # define KEY_S 1
@@ -23,6 +27,9 @@
 # define KEY_RIGHT 124
 # define MOVE_SPEED 0.1
 # define ROT_SPEED 0.05
+# include "parse.h"
+# include <stdint.h>
+
 
 typedef struct  s_data
 {
@@ -83,6 +90,7 @@ typedef struct	s_keys
 	int			d;
 	int			left;
 	int			right;
+	int 		esc;
 } 				t_keys;
 
 typedef struct	s_texture
@@ -108,7 +116,17 @@ typedef struct	s_textures
 
 typedef struct	s_sprite
 {
+	t_d_vector	map_pos;
 	t_d_vector	pos;
+	t_d_vector	transform;
+	int			sprite_screen;
+	int			height;
+	int			width;
+	t_vector	draw_start;
+	t_vector	draw_end;
+
+
+
 }				t_sprite;
 
 typedef struct	s_sprites
@@ -128,6 +146,8 @@ typedef struct	s_game
 	t_textures	textures;
 	t_sprites	sprites;
 }				t_game;
+
+void		init_space(t_game *game, t_config config);
 
 BOOL handle_pressed_key(int key, t_game *game);
 
@@ -150,4 +170,13 @@ void		get_texture_data(t_texture *texture, t_ray ray, t_player player, t_config 
 t_texture	*select_texture(t_textures *textures, t_ray ray, t_player player);
 
 void	init_sprites(t_sprites *sprites, t_config config, void *mlx);
+
+void	init_sprites_position(int *order, double *distance,
+							  t_player player, t_sprites sprites);
+
+void	get_sprite_data(t_sprite *sprite, t_player player, t_config config);
+
+void	calculate_sprite_render_data(t_sprite *sprite, t_config config);
+
+void	render_sprite(t_sprite sprite, t_game *game, double *Zbuffer);
 #endif

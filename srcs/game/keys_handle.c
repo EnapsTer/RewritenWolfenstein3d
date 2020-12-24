@@ -20,6 +20,7 @@ void	init_keys(t_keys *keys)
 	keys->d = 0;
 	keys->left = 0;
 	keys->right = 0;
+	keys->esc = 0;
 }
 
 BOOL	handle_pressed_key(int key, t_game *game)
@@ -36,6 +37,8 @@ BOOL	handle_pressed_key(int key, t_game *game)
 		game->keys.left = 1;
 	if (key == KEY_RIGHT || key == KEY_E)
 		game->keys.right = 1;
+	if (key == ESC)
+		finish_game(game);
 	return (TRUE);
 }
 
@@ -53,5 +56,6 @@ BOOL	handle_unpressed_key(int key, t_game *game)
 		game->keys.left = 0;
 	if (key == KEY_RIGHT || key == KEY_E)
 		game->keys.right = 0;
+
 	return (TRUE);
 }

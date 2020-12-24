@@ -13,19 +13,18 @@
 #include "cub3d.h"
 #include "string_array_utils.h"
 #include "libft.h"
-//обработать дефолтное разрешение через mlx
+
 static BOOL	check_resolution(char *res_str_x, char *res_str_y)
 {
 	int x;
 	int y;
-//5120 x 2880
+
 	x = ft_atoi(res_str_x);
 	y = ft_atoi(res_str_y);
 	if (get_num_len(x) != ft_strlen(res_str_x) ||
 		get_num_len(y) != ft_strlen(res_str_y) ||
 		x <= 0 || y <= 0)
 		return (FALSE);
-	//mlx display check
 	return (TRUE);
 }
 int get_resolution(t_res *res, char **res_arr)
@@ -36,6 +35,10 @@ int get_resolution(t_res *res, char **res_arr)
 	{
 		res->x = ft_atoi(res_arr[1]);
 		res->y = ft_atoi(res_arr[2]);
+		if (res->x > 5120 / 2)
+			res->x = 5120 / 2;
+		if (res->y > 2880 / 2)
+			res->y = 2880 / 2;
 		return (TRUE);
 	}
 	return (ERROR);

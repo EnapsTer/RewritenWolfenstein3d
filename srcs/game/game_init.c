@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_init.c                                        :+:      :+:    :+:   */
+/*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aherlind <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -35,20 +35,36 @@ static void	mlx_data_init(t_game *game)
 		);
 }
 
-BOOL		game_init(t_config config)
+void		init_space(t_game *game, t_config config)
+{
+	game->config = config;
+	mlx_data_init(game);
+	init_keys(&game->keys);
+	init_player(&game->player, game->config);
+	init_textures(&game->textures, config, &game->mlx);
+	init_sprites(&game->sprites, config, game->mlx.mlx);
+}
+
+BOOL		init_game(t_config config)
 {
 	t_game	game;
 
-	game.config = config;
-	mlx_data_init(&game);
-	init_keys(&game.keys);
-	init_player(&game.player, game.config);
-	init_textures(&game.textures, config, &game.mlx);
-	init_sprites(&game.sprites, config, game.mlx.mlx);
-
+	init_space(&game, config);
 	mlx_do_key_autorepeatoff(game.mlx.mlx);
 	mlx_hook(game.mlx.win, 2, 0, handle_pressed_key, &game);
 	mlx_hook(game.mlx.win, 3, 0, handle_unpressed_key, &game);
+	mlx_hook(game.mlx.win, 17, 0, finish_game, &game);
 	mlx_loop_hook(game.mlx.mlx, game_render, &game);
 	mlx_loop(game.mlx.mlx);
+}
+
+int			finish_game(t_game *game)
+{
+	if (game->sprites.sprites_count)
+	{
+		free(game->sprites.sprite_arr);
+		game->sprites.sprite_arr = NULL;
+	}
+	exit(1);
+	return (0);
 }

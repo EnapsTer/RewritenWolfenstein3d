@@ -7,8 +7,8 @@ include_directories(Libft includes srcs srcs/parsing srcs/utils)
 
 set(PARSE_EXE srcs/parsing/config_parsing.c srcs/parsing/resolution_handler.c srcs/parsing/texture_handler.c srcs/parsing/color_handler.c srcs/parsing/config_handler.c srcs/parsing/map_handler.c)
 set(UTILS_EXE srcs/utils/string_array_utils.c srcs/utils/color_utils.c)
-set(INCLUDES includes/cub3d.h includes/parse.h includes/string_array_utils.h includes/color_utils.h includes/game_engine.h)
-set(GAME_EXE srcs/game/game_init.c srcs/game/keys_handle.c srcs/game/game_render.c srcs/game/my_mlx_functions.c srcs/game/ray/ray_init.c srcs/game/player/player_init.c srcs/game/ray/raycasting.c srcs/game/player/player_move.c srcs/game/texture/init_textures.c srcs/game/texture/textures_handler.c srcs/game/sprites/sprite_init.c)
+set(INCLUDES includes/cub3d.h includes/parse.h includes/string_array_utils.h includes/color_utils.h includes/game_engine.h includes/sort_utils.h includes/screenshot.h)
+set(GAME_EXE srcs/game/game_init.c srcs/game/keys_handle.c srcs/game/game_render.c srcs/game/my_mlx_functions.c srcs/game/ray/ray_init.c srcs/game/player/player_init.c srcs/game/ray/raycasting.c srcs/game/player/player_move.c srcs/game/texture/init_textures.c srcs/game/texture/textures_handler.c srcs/game/sprites/sprite_init.c srcs/game/sprites/sprites_handler.c srcs/utils/sort_utils.c srcs/screenshot/init_bitmap.c srcs/screenshot/bitmap_handler.c)
 
 
 add_subdirectory(Libft)

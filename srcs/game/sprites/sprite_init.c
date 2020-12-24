@@ -56,8 +56,8 @@ void	write_sprite_array(t_sprite *sprite_arr, char **map)
 		{
 			if (map[i][j] == '2')
 			{
-				sprite_arr[index].pos.x = j + 0.5;
-				sprite_arr[index].pos.y = i + 0.5;
+				sprite_arr[index].map_pos.x = j + 0.5;
+				sprite_arr[index].map_pos.y = i + 0.5;
 				index++;
 			}
 			j++;
@@ -73,19 +73,23 @@ void	init_sprites(t_sprites *sprites, t_config config, void *mlx)
 	sprites_cnt = count_sprites(config.map);
 	sprites->sprites_count = sprites_cnt;
 	sprites->sprite_arr = (t_sprite *)malloc(sizeof(t_sprite)
-			* (sprites_cnt + 1));
+																* sprites_cnt);
 	if (!sprites->sprite_arr || !is_xpm(config.path.sprite))
-		send_error("Error");
+	{
+		free(sprites->sprite_arr);
+		send_error("Sprites error");
+	}
 	write_sprite_array(sprites->sprite_arr, config.map);
-	sprites->texture.img.img = mlx_xpm_file_to_image(
-			mlx, config.path.sprite,
+	sprites->texture.img.img = mlx_xpm_file_to_image(mlx, config.path.sprite,
 			&sprites->texture.width,
 			&sprites->texture.height
 	);
 	if (!sprites->texture.img.img)
+	{
+		free(sprites->sprite_arr);
 		send_error("Can't open sprite texture");
-	sprites->texture.img.addr = mlx_get_data_addr(
-			sprites->texture.img.img,
+	}
+	sprites->texture.img.addr = mlx_get_data_addr( sprites->texture.img.img,
 			&sprites->texture.img.bits_per_pixel,
 			&sprites->texture.img.line_length,
 			&sprites->texture.img.endian

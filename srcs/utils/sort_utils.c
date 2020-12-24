@@ -1,42 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_mlx_functions.c                                 :+:      :+:    :+:   */
+/*   sort_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aherlind <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/17 13:32:54 by aherlind          #+#    #+#             */
-/*   Updated: 2020/12/17 13:33:01 by aherlind         ###   ########.fr       */
+/*   Created: 2020/12/24 16:49:05 by aherlind          #+#    #+#             */
+/*   Updated: 2020/12/24 16:49:07 by aherlind         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "libft.h"
 
-BOOL	is_xpm(char	*path)
+void	sort_double_vectors(int *order, double *distance, int len)
 {
-	int i;
+	int	i;
+	int	j;
+	double	temp;
 
 	i = 0;
-	while (i < (int)ft_strlen(path))
+	while (i < len - 1)
 	{
-		if (ft_strcmp(path + i, ".xpm") == 0)
-			return (TRUE);
+		j = i + 1;
+		while (j < len)
+		{
+			if (distance[i] < distance[j])
+			{
+				temp = distance[i];
+				distance[i] = distance[j];
+				distance[j] = temp;
+				temp = (double)order[i];
+				order[i] = order[j];
+				order[j] = (int)temp;
+			}
+			j++;
+		}
 		i++;
 	}
-	return (FALSE);
-}
-
-void	send_error(char *str)
-{
-	perror(str);
-	exit(-1);
-}
-
-void	pixel_put(t_data *data, int x, int y, int color)
-{
-	char    *dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
 }
