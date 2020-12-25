@@ -51,9 +51,9 @@ void			do_screenshot(t_config config)
 	void	*bitmap;
 	t_game	game;
 
+	fd = create_clean_file("cub3d.bmp");
 	init_space(&game, config);
 	game_render(&game);
-	fd = create_clean_file("cub3d.bmp");
 	bitmap = init_bitmap(&game);
 	write(fd, bitmap, 54);
 	write_img(fd, game);

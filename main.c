@@ -30,6 +30,8 @@ BOOL	is_cub(char	*path)
 
 //написать makefile
 //написать комментарии
+//привести все к норме
+//зарефакторить my_mlx_functions
 int main(int argc, char **argv)
 {
 	int			fd;
