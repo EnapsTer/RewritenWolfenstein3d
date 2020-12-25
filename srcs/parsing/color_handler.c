@@ -32,16 +32,16 @@ static BOOL	check_color(char **strs)
 	return (TRUE);
 }
 
-int 	get_color(t_color *color, char **color_arr)
+int			get_color(t_color *color, char **color_arr)
 {
 	char	**strs;
 
 	strs = ft_split(color_arr[1], ',');
 	if (str_arr_len(color_arr) != 2 || ft_strcnt(color_arr[1], ',') != 2 ||
 		str_arr_len(strs) != 3 || !check_color(strs) ||
-		!is_equal_colors(*color, get_rgb(-1, -1 , -1)) )
+		!is_equal_colors(*color, get_rgb(-1, -1, -1)))
 		return (ERROR);
-	*color = get_rgb(ft_atoi(strs[0]),ft_atoi(strs[1]),ft_atoi(strs[2]));
+	*color = get_rgb(ft_atoi(strs[0]), ft_atoi(strs[1]), ft_atoi(strs[2]));
 	free_str_arr(&strs);
 	return (TRUE);
 }

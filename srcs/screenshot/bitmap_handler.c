@@ -37,7 +37,7 @@ static void		write_img(int fd, t_game game)
 		while (x < game.config.res.x)
 		{
 			color = *(int*)(game.mlx.img.addr + (y * game.mlx.img.line_length +
-								  x * (game.mlx.img.bits_per_pixel / 8)));
+								x * (game.mlx.img.bits_per_pixel / 8)));
 			write(fd, &color, 4);
 			x++;
 		}

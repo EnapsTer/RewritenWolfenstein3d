@@ -13,14 +13,14 @@
 #include "cub3d.h"
 #include <math.h>
 
-BOOL is_passable(char c)
+static BOOL	is_passable(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'W' || c == 'E' || c == '0')
 		return (TRUE);
 	return (FALSE);
 }
 
-void	move_x(t_player *player, t_keys keys, t_config config)
+static void	move_x(t_player *player, t_keys keys, t_config config)
 {
 	double i;
 	double j;
@@ -49,7 +49,7 @@ void	move_x(t_player *player, t_keys keys, t_config config)
 	}
 }
 
-void	move_y(t_player *player, t_keys keys, t_config config)
+static void	move_y(t_player *player, t_keys keys, t_config config)
 {
 	int i;
 	int j;
@@ -78,10 +78,11 @@ void	move_y(t_player *player, t_keys keys, t_config config)
 	}
 }
 
-void	rotate_x(t_d_vector *dir, t_d_vector *plane, t_keys keys)
+static void	rotate_x(t_d_vector *dir, t_d_vector *plane, t_keys keys)
 {
 	double temp_dir_x;
 	double temp_plane_x;
+
 	if (keys.left == 1)
 	{
 		temp_dir_x = dir->x;
@@ -102,7 +103,7 @@ void	rotate_x(t_d_vector *dir, t_d_vector *plane, t_keys keys)
 	}
 }
 
-void	move_player(t_player *player, t_keys keys, t_config config)
+void		move_player(t_player *player, t_keys keys, t_config config)
 {
 	move_x(player, keys, config);
 	move_y(player, keys, config);

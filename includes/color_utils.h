@@ -11,9 +11,10 @@
 /* ************************************************************************** */
 
 #ifndef CUB3D_PROJECT_COLOR_UTILS_H
-#define CUB3D_PROJECT_COLOR_UTILS_H
+# define CUB3D_PROJECT_COLOR_UTILS_H
 
 t_color		get_rgb(int r, int g, int b);
 
 BOOL		is_equal_colors(t_color color1, t_color color2);
+
 #endif

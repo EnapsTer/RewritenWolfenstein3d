@@ -2,7 +2,7 @@ CC = gcc
 
 NAME = cub3D
 
-CFLAGS = -Wall -Wextra
+CFLAGS = -Wall -Wextra -Werror
 
 MLXFLAGS = -framework OpenGL -framework AppKit
 
@@ -30,7 +30,9 @@ GAME_SPRITES_DIR = $(GAME_DIR)/sprites
 
 GAME_TEXTURE_DIR = $(GAME_DIR)/texture
 
-INCLUDES = includes
+#LIBFT_INCLUDES = $(LIBFT)/libft.h $(LIBFT)/get_next_line.h
+
+INCLUDES = includes/
 
 SRC =	$(GAME_PLAYER_DIR)/player_init.c \
 		$(GAME_PLAYER_DIR)/player_move.c \
@@ -39,11 +41,10 @@ SRC =	$(GAME_PLAYER_DIR)/player_init.c \
 		$(GAME_SPRITES_DIR)/sprites_init.c \
 		$(GAME_SPRITES_DIR)/sprites_handler.c \
 		$(GAME_TEXTURE_DIR)/textures_handler.c \
-		$(GAME_TEXTURE_DIR)/textures_init.c
+		$(GAME_TEXTURE_DIR)/textures_init.c \
 		$(GAME_DIR)/game_init.c \
 		$(GAME_DIR)/game_render.c \
 		$(GAME_DIR)/keys_handler.c \
-		$(GAME_DIR)/my_mlx_functions.c \
 		$(PARSE_DIR)/color_handler.c \
 		$(PARSE_DIR)/config_handler.c \
 		$(PARSE_DIR)/config_parsing.c \
@@ -52,21 +53,22 @@ SRC =	$(GAME_PLAYER_DIR)/player_init.c \
 		$(PARSE_DIR)/texture_handler.c \
 		$(SCREENSHOT_DIR)/bitmap_init.c \
 		$(SCREENSHOT_DIR)/bitmap_handler.c \
+		$(UTILS_DIR)/game_utils.c \
 		$(UTILS_DIR)/color_utils.c \
 		$(UTILS_DIR)/sort_utils.c \
-		$(UTILS_DIR)/string_array_utils.c
-
+		$(UTILS_DIR)/string_array_utils.c \
+		main.c
 
 OBJS = $(SRC:.c=.o)
 
 all: $(NAME)
 
 .c.o:
-	@$(CC) -I$(INCLD) -c $< -o $(<:.c=.o)
+	@$(CC) -I$(INCLUDES) -c $< -o $(<:.c=.o)
 
 $(NAME): $(OBJS)
 	@make bonus -C $(LIBFT)
-	@$(CC) $(FLAGS) $(MLXFLAGS) $(LIBS) -I$(INCLUDES) -c $< -o $(<:.c=.o)
+	@$(CC) $(FLAGS) $(MLXFLAGS) $(LIBS) $(OBJS) -o $(NAME)
 	@echo "Compile cub3d done!"
 
 clean:
@@ -80,10 +82,10 @@ fclean: clean
 	@echo "Clean libftprintf.a done!"
 
 norme:
-	norminette ./$(LIBFT)/
+	norminette $(LIBFT)
 	@echo
-	norminette ./$(INCLUDES)/
+	norminette $(INCLUDES)
 	@echo
-	norminette ./$(DIR_S)/
+	norminette $(DIR_S)
 
 re: fclean all

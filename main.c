@@ -14,7 +14,7 @@
 #include "libft.h"
 #include <fcntl.h>
 
-BOOL	is_cub(char	*path)
+BOOL	is_cub(char *path)
 {
 	int i;
 
@@ -28,11 +28,7 @@ BOOL	is_cub(char	*path)
 	return (FALSE);
 }
 
-//написать makefile
-//написать комментарии
-//привести все к норме
-//зарефакторить my_mlx_functions
-int main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	int			fd;
 	t_config	config;
@@ -44,6 +40,8 @@ int main(int argc, char **argv)
 	if (argc == 3 && ft_strcmp(argv[2], "--save"))
 		send_error("Invalid flag name try --save");
 	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+		send_error("Incorrect file");
 	if (get_config(fd, &config) == ERROR)
 		send_error("Map error!");
 	if (argc == 2)

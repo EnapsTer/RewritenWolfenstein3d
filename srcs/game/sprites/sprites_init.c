@@ -15,12 +15,12 @@
 #include "libft.h"
 #include "mlx.h"
 
-int		count_sprites(char **map)
+static int	count_sprites(char **map)
 {
-	int 	count;
-	int 	i;
-	int 	j;
-	int 	len;
+	int	count;
+	int	i;
+	int	j;
+	int	len;
 
 	i = 0;
 	len = str_arr_len(map);
@@ -39,12 +39,12 @@ int		count_sprites(char **map)
 	return (count);
 }
 
-void	write_sprite_array(t_sprite *sprite_arr, char **map)
+static void	write_sprite_array(t_sprite *sprite_arr, char **map)
 {
-	int 	i;
-	int 	j;
-	int		index;
-	int 	len;
+	int	i;
+	int	j;
+	int	index;
+	int	len;
 
 	i = 0;
 	index = 0;
@@ -66,9 +66,9 @@ void	write_sprite_array(t_sprite *sprite_arr, char **map)
 	}
 }
 
-void	init_sprites(t_sprites *sprites, t_config config, void *mlx)
+void		init_sprites(t_sprites *sprites, t_config config, void *mlx)
 {
-	int 	sprites_cnt;
+	int	sprites_cnt;
 
 	sprites_cnt = count_sprites(config.map);
 	sprites->sprites_count = sprites_cnt;
@@ -82,16 +82,14 @@ void	init_sprites(t_sprites *sprites, t_config config, void *mlx)
 	write_sprite_array(sprites->sprite_arr, config.map);
 	sprites->texture.img.img = mlx_xpm_file_to_image(mlx, config.path.sprite,
 			&sprites->texture.width,
-			&sprites->texture.height
-	);
+			&sprites->texture.height);
 	if (!sprites->texture.img.img)
 	{
 		free(sprites->sprite_arr);
 		send_error("Can't open sprite texture");
 	}
-	sprites->texture.img.addr = mlx_get_data_addr( sprites->texture.img.img,
+	sprites->texture.img.addr = mlx_get_data_addr(sprites->texture.img.img,
 			&sprites->texture.img.bits_per_pixel,
 			&sprites->texture.img.line_length,
-			&sprites->texture.img.endian
-	);
+			&sprites->texture.img.endian);
 }

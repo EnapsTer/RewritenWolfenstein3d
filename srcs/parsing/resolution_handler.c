@@ -27,7 +27,8 @@ static BOOL	check_resolution(char *res_str_x, char *res_str_y)
 		return (FALSE);
 	return (TRUE);
 }
-int get_resolution(t_res *res, char **res_arr)
+
+int			get_resolution(t_res *res, char **res_arr)
 {
 	if (str_arr_len(res_arr) != 3 || !check_resolution(res_arr[1], res_arr[2]))
 		return (ERROR);

@@ -13,7 +13,7 @@
 #include "cub3d.h"
 #include <math.h>
 
-static void calculate_dir_x(t_ray *ray, t_player *player)
+static void	calculate_dir_x(t_ray *ray, t_player *player)
 {
 	if (ray->dir.x < 0)
 	{
@@ -29,7 +29,7 @@ static void calculate_dir_x(t_ray *ray, t_player *player)
 	}
 }
 
-static void calculate_dir_y(t_ray *ray, t_player *player)
+static void	calculate_dir_y(t_ray *ray, t_player *player)
 {
 	if (ray->dir.y < 0)
 	{
@@ -45,8 +45,7 @@ static void calculate_dir_y(t_ray *ray, t_player *player)
 	}
 }
 
-
-void init_ray(t_ray *ray, t_player *player, t_config config, int stripe)
+void		init_ray(t_ray *ray, t_player *player, t_config config, int stripe)
 {
 	double camera;
 

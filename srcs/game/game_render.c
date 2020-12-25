@@ -15,10 +15,10 @@
 #include <tcl.h>
 #include "mlx.h"
 
-void render_textures(t_game *game, int column)
+static void	render_textures(t_game *game, int column)
 {
 	t_texture	*texture;
-	int 		y;
+	int			y;
 
 	texture = select_texture(&game->textures, game->ray, game->player);
 	get_texture_data(texture, game->ray, game->player, game->config);
@@ -27,13 +27,14 @@ void render_textures(t_game *game, int column)
 	{
 		texture->pos.y = (int)texture->start_pos & (64 - 1);
 		texture->start_pos += texture->step;
-		texture->color = ((int *)texture->img.addr)[64 * texture->pos.y + texture->pos.x];
+		texture->color = ((int *)texture->img.addr)
+				[64 * texture->pos.y + texture->pos.x];
 		pixel_put(&game->mlx.img, column, y, texture->color);
 		y++;
 	}
 }
 
-void	render_sky(t_game *game)
+static void	render_sky(t_game *game)
 {
 	int i;
 	int j;
@@ -51,7 +52,7 @@ void	render_sky(t_game *game)
 	}
 }
 
-void	render_floor(t_game *game)
+static void	render_floor(t_game *game)
 {
 	int i;
 	int j;
@@ -69,12 +70,12 @@ void	render_floor(t_game *game)
 	}
 }
 
-void	render_sprites(t_game *game, double *Zbuffer)
+static void	render_sprites(t_game *game, double *buffer)
 {
-	int		*order;
-	double	*distance;
-	int		i;
-	t_sprite sprite;
+	int			*order;
+	double		*distance;
+	int			i;
+	t_sprite	sprite;
 
 	i = 0;
 	order = (int *)malloc(sizeof(int) * game->sprites.sprites_count);
@@ -87,7 +88,7 @@ void	render_sprites(t_game *game, double *Zbuffer)
 		sprite = game->sprites.sprite_arr[order[i]];
 		get_sprite_data(&sprite, game->player, game->config);
 		calculate_sprite_render_data(&sprite, game->config);
-		render_sprite(sprite, game, Zbuffer);
+		render_sprite(sprite, game, buffer);
 		i++;
 	}
 	free(order);
@@ -96,28 +97,31 @@ void	render_sprites(t_game *game, double *Zbuffer)
 	distance = NULL;
 }
 
-BOOL	game_render(t_game *game)
+BOOL		game_render(t_game *game)
 {
+	double	*buffer;
+	int		x;
+
+	buffer = malloc(sizeof(double) * game->config.res.x);
+	x = 0;
 	render_sky(game);
 	render_floor(game);
-	double *ZBuffer;
-
-	ZBuffer = malloc(sizeof(double) * game->config.res.x);
-	for(int x = 0; x < game->config.res.x; x++)
+	while (x < game->config.res.x)
 	{
 		game->player.map_pos.x = (int)game->player.pos.x;
 		game->player.map_pos.y = (int)game->player.pos.y;
 		init_ray(&game->ray, &game->player, game->config, x);
 		raycast(&game->ray, &game->player, game->config);
 		render_textures(game, x);
-		ZBuffer[x] = game->ray.wall_dist;
+		buffer[x] = game->ray.wall_dist;
+		x++;
 	}
 	if (game->sprites.sprites_count)
-		render_sprites(game, ZBuffer);
+		render_sprites(game, buffer);
 	move_player(&game->player, game->keys, game->config);
-	free(ZBuffer);
-	ZBuffer = NULL;
+	free(buffer);
+	buffer = NULL;
 	mlx_put_image_to_window(game->mlx.mlx, game->mlx.win,
-						 game->mlx.img.img, 0, 0);
+									game->mlx.img.img, 0, 0);
 	return (TRUE);
 }

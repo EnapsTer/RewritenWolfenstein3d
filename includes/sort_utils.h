@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #ifndef SORT_UTILS_H
-#define SORT_UTILS_H
+# define SORT_UTILS_H
 
 void	sort_double_vectors(int *order, double *distance, int len);
 

@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int 	str_arr_len(char **arr)
+int		str_arr_len(char **arr)
 {
 	int	len;
 
@@ -26,8 +26,8 @@ int 	str_arr_len(char **arr)
 
 int		str_arr_append(char ***arr, char *line)
 {
-	char **temp;
-	int i;
+	char	**temp;
+	int		i;
 
 	i = -1;
 	if (!(temp = (char **)malloc(sizeof(char *) * (str_arr_len(*arr) + 2))))
@@ -42,22 +42,19 @@ int		str_arr_append(char ***arr, char *line)
 		free(*arr);
 	}
 	temp[++i] = NULL;
-	char *str = temp[i];
 	*arr = temp;
 	return (TRUE);
 }
 
-void 	free_str_arr(char ***arr)
+void	free_str_arr(char ***arr)
 {
 	int	i;
 
 	i = 0;
-	char *line;
 	if (*arr == NULL)
-		return;
+		return ;
 	while ((*arr)[i])
 	{
-		line = (*arr)[i];
 		free((*arr)[i]);
 		(*arr)[i] = NULL;
 		i++;

@@ -32,7 +32,8 @@ t_texture	*select_texture(t_textures *textures, t_ray ray, t_player player)
 	return (NULL);
 }
 
-void		get_texture_data(t_texture *texture, t_ray ray, t_player player, t_config config)
+void		get_texture_data(t_texture *texture, t_ray ray, t_player player,
+																t_config config)
 {
 	double	wall_hit_x;
 
@@ -51,6 +52,3 @@ void		get_texture_data(t_texture *texture, t_ray ray, t_player player, t_config 
 			texture->step;
 	texture->num = config.map[player.map_pos.y][player.map_pos.x] - 1;
 }
-
-
-

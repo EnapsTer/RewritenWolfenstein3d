@@ -20,19 +20,16 @@ static void	mlx_data_init(t_game *game)
 			game->mlx.mlx,
 			game->config.res.x,
 			game->config.res.y,
-			"Cub3d"
-		);
+			"Cub3d");
 	game->mlx.img.img = mlx_new_image(
 			game->mlx.mlx,
 			game->config.res.x,
-			game->config.res.y
-		);
+			game->config.res.y);
 	game->mlx.img.addr = mlx_get_data_addr(
 			game->mlx.img.img,
 			&game->mlx.img.bits_per_pixel,
 			&game->mlx.img.line_length,
-			&game->mlx.img.endian
-		);
+			&game->mlx.img.endian);
 }
 
 void		init_space(t_game *game, t_config config)
@@ -56,6 +53,7 @@ BOOL		init_game(t_config config)
 	mlx_hook(game.mlx.win, 17, 0, finish_game, &game);
 	mlx_loop_hook(game.mlx.mlx, game_render, &game);
 	mlx_loop(game.mlx.mlx);
+	return (TRUE);
 }
 
 int			finish_game(t_game *game)

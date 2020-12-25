@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #ifndef GAME_ENGINE_H
-#define GAME_ENGINE_H
+# define GAME_ENGINE_H
 # define ERROR -1
 # define TRUE 1
 # define FALSE 0
@@ -30,15 +30,14 @@
 # include "parse.h"
 # include <stdint.h>
 
-
-typedef struct  s_data
+typedef struct	s_data
 {
-	void        *img;
-	char        *addr;
-	int         bits_per_pixel;
-	int         line_length;
-	int         endian;
-}               t_data;
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+}				t_data;
 
 typedef struct	s_vector
 {
@@ -52,14 +51,13 @@ typedef struct	s_d_vector
 	double			y;
 }				t_d_vector;
 
-
 typedef struct	s_ray
 {
-	t_d_vector 	dir;
+	t_d_vector	dir;
 	t_d_vector	side_dist;
 	t_d_vector	delta_dist;
-	int 		draw_start; // сделать как вектор
-	int 		draw_end;
+	int			draw_start;
+	int			draw_end;
 	int			wall_side;
 	double		wall_dist;
 	int			height;
@@ -67,12 +65,12 @@ typedef struct	s_ray
 
 typedef struct	s_player
 {
-	t_d_vector 	dir;
+	t_d_vector	dir;
 	t_d_vector	plane;
 	t_d_vector	pos;
 	t_vector	map_pos;
 	t_vector	step;
-	char 		start_view;
+	char		start_view;
 }				t_player;
 
 typedef struct	s_mlx
@@ -86,12 +84,12 @@ typedef struct	s_keys
 {
 	int			w;
 	int			s;
-	int 		a;
+	int			a;
 	int			d;
 	int			left;
 	int			right;
-	int 		esc;
-} 				t_keys;
+	int			esc;
+}				t_keys;
 
 typedef struct	s_texture
 {
@@ -124,9 +122,6 @@ typedef struct	s_sprite
 	int			width;
 	t_vector	draw_start;
 	t_vector	draw_end;
-
-
-
 }				t_sprite;
 
 typedef struct	s_sprites
@@ -147,36 +142,42 @@ typedef struct	s_game
 	t_sprites	sprites;
 }				t_game;
 
-void		init_space(t_game *game, t_config config);
+void			init_space(t_game *game, t_config config);
 
-BOOL handle_pressed_key(int key, t_game *game);
+BOOL			handle_pressed_key(int key, t_game *game);
 
-BOOL handle_unpressed_key(int key, t_game *game);
+BOOL			handle_unpressed_key(int key, t_game *game);
 
-BOOL	game_render(t_game *game);
+BOOL			game_render(t_game *game);
 
-void init_player(t_player *player, t_config config);
+void			init_player(t_player *player, t_config config);
 
-void init_ray(t_ray *ray, t_player *player, t_config config, int stripe);
+void			init_ray(t_ray *ray, t_player *player, t_config config,
+						int stripe);
 
-void		raycast(t_ray *ray, t_player *player, t_config config);
+void			raycast(t_ray *ray, t_player *player, t_config config);
 
-void	move_player(t_player *player, t_keys keys, t_config config);
+void			move_player(t_player *player, t_keys keys, t_config config);
 
-void init_textures(t_textures *textures, t_config config, t_mlx *mlx);
+void			init_textures(t_textures *textures, t_config config,
+											t_mlx *mlx);
 
-void		get_texture_data(t_texture *texture, t_ray ray, t_player player, t_config config);
+void			get_texture_data(t_texture *texture, t_ray ray, t_player player,
+											t_config config);
 
-t_texture	*select_texture(t_textures *textures, t_ray ray, t_player player);
+t_texture		*select_texture(t_textures *textures, t_ray ray,
+											t_player player);
 
-void	init_sprites(t_sprites *sprites, t_config config, void *mlx);
+void			init_sprites(t_sprites *sprites, t_config config, void *mlx);
 
-void	init_sprites_position(int *order, double *distance,
-							  t_player player, t_sprites sprites);
+void			init_sprites_position(int *order, double *distance,
+											t_player player, t_sprites sprites);
 
-void	get_sprite_data(t_sprite *sprite, t_player player, t_config config);
+void			get_sprite_data(t_sprite *sprite, t_player player,
+											t_config config);
 
-void	calculate_sprite_render_data(t_sprite *sprite, t_config config);
+void			calculate_sprite_render_data(t_sprite *sprite, t_config config);
 
-void	render_sprite(t_sprite sprite, t_game *game, double *Zbuffer);
+void			render_sprite(t_sprite sprite, t_game *game, double *buffer);
+
 #endif

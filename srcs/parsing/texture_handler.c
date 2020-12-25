@@ -26,7 +26,7 @@ static BOOL	check_texture(char *path)
 	return (TRUE);
 }
 
-int		get_texture(char **texture, char **texture_arr)
+int			get_texture(char **texture, char **texture_arr)
 {
 	if (*texture || !check_texture(texture_arr[1]) ||
 			str_arr_len(texture_arr) != 2)

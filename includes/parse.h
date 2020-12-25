@@ -11,51 +11,52 @@
 /* ************************************************************************** */
 
 #ifndef PARSE_H
-#define PARSE_H
+# define PARSE_H
 
-struct		s_res
+typedef struct	s_res
 {
 	int x;
 	int y;
-} typedef	t_res;
+}				t_res;
 
-struct		s_color
+typedef struct	s_color
 {
 	int r;
 	int g;
 	int b;
 	int color;
-} typedef	t_color;
+}				t_color;
 
-struct		s_path
+typedef struct	s_path
 {
 	char *no;
 	char *so;
 	char *we;
 	char *ea;
 	char *sprite;
-} typedef	t_path;
+}				t_path;
 
-struct		s_config
+typedef struct	s_config
 {
 	t_res		res;
 	t_color		floor_color;
 	t_color		ceil_color;
 	t_path		path;
 	char		**map;
-} typedef	t_config;
+}				t_config;
 
-int		get_resolution(t_res *res, char **res_arr);
+int				get_resolution(t_res *res, char **res_arr);
 
-int		get_texture(char **texture, char **texture_arr);
+int				get_texture(char **texture, char **texture_arr);
 
-int 	get_color(t_color *color, char **color_arr);
+int				get_color(t_color *color, char **color_arr);
 
-void	init_config(t_config *config);
+void			init_config(t_config *config);
 
-void	free_config(t_config *config);
+void			free_config(t_config *config);
 
-void	free_lines(char ***arr, char **line);
+void			free_lines(char ***arr, char **line);
 
-int		check_map(char **map);
+int				check_map(char **map);
+
 #endif

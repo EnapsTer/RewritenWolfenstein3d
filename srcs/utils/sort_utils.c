@@ -14,8 +14,8 @@
 
 void	sort_double_vectors(int *order, double *distance, int len)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	double	temp;
 
 	i = 0;

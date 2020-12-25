@@ -56,6 +56,5 @@ BOOL	handle_unpressed_key(int key, t_game *game)
 		game->keys.left = 0;
 	if (key == KEY_RIGHT || key == KEY_E)
 		game->keys.right = 0;
-
 	return (TRUE);
 }

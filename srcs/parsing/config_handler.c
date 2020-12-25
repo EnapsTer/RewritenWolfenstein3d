@@ -36,6 +36,7 @@ void	init_config(t_config *config)
 /*
 **	Frees the config
 */
+
 void	free_config(t_config *config)
 {
 	if (config->path.no)

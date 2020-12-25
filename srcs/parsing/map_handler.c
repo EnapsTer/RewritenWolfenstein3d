@@ -14,7 +14,7 @@
 #include "string_array_utils.h"
 #include "libft.h"
 
-BOOL	is_valid_interior(int i, int j, char **map)
+static BOOL	is_valid_interior(int i, int j, char **map)
 {
 	if (map[i][j - 1] == ' ' || map[i][j + 1] == ' ')
 		return (FALSE);
@@ -24,7 +24,8 @@ BOOL	is_valid_interior(int i, int j, char **map)
 		return (FALSE);
 	return (TRUE);
 }
-BOOL	is_rim(int i, int j, char **map)
+
+static BOOL	is_rim(int i, int j, char **map)
 {
 	int lines_count;
 
@@ -36,14 +37,14 @@ BOOL	is_rim(int i, int j, char **map)
 	return (FALSE);
 }
 
-BOOL	is_wall_or_space(char c)
+static BOOL	is_wall_or_space(char c)
 {
 	if (c == ' ' || c == '1')
 		return (TRUE);
 	return (FALSE);
 }
 
-int		check_player_pos(char c, BOOL flag)
+static int	check_player_pos(char c, BOOL flag)
 {
 	if (ft_strcnt("NSWE", c))
 	{
@@ -56,8 +57,7 @@ int		check_player_pos(char c, BOOL flag)
 	return (FALSE);
 }
 
-
-int		check_map(char **map)
+int			check_map(char **map)
 {
 	int		lines_count;
 	int		i;
@@ -67,10 +67,10 @@ int		check_map(char **map)
 	i = 0;
 	status = FALSE;
 	lines_count = str_arr_len(map);
-	while(i < lines_count)
+	while (i < lines_count)
 	{
 		j = 0;
-		while(j < ft_strlen(map[i]))
+		while (j < ft_strlen(map[i]))
 		{
 			if (!is_wall_or_space(map[i][j]))
 				if (is_rim(i, j, map) || !is_valid_interior(i, j, map))

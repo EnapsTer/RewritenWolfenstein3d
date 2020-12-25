@@ -32,7 +32,7 @@ void		calc_for_render(t_ray *ray, t_player *player, t_config config)
 		ray->draw_start = 0;
 	ray->draw_end = ray->height / 2 + config.res.y / 2;
 	if (ray->draw_end >= config.res.y || ray->draw_end < 0)
-		ray->draw_end = config.res.y; // исправлял ray->draw_end = config.res.y - 1;
+		ray->draw_end = config.res.y;
 }
 
 void		raycast(t_ray *ray, t_player *player, t_config config)
@@ -40,7 +40,7 @@ void		raycast(t_ray *ray, t_player *player, t_config config)
 	int	wall_hit;
 
 	wall_hit = 0;
-	while(wall_hit == 0)
+	while (wall_hit == 0)
 	{
 		if (ray->side_dist.x < ray->side_dist.y)
 		{
@@ -54,7 +54,7 @@ void		raycast(t_ray *ray, t_player *player, t_config config)
 			player->map_pos.y += player->step.y;
 			ray->wall_side = 1;
 		}
-		if(config.map[player->map_pos.y][player->map_pos.x] == '1')
+		if (config.map[player->map_pos.y][player->map_pos.x] == '1')
 			wall_hit = 1;
 	}
 	calc_for_render(ray, player, config);

@@ -11,11 +11,10 @@
 /* ************************************************************************** */
 
 #ifndef SCREENSHOT_H
-#define SCREENSHOT_H
+# define SCREENSHOT_H
 
-void			*init_bitmap(t_game *game);
+void	*init_bitmap(t_game *game);
 
-static void		set_zero_byts(void *dest, int len);
-
+void	set_zero_byts(void *dest, int len);
 
 #endif

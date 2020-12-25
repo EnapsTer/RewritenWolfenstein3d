@@ -12,7 +12,7 @@
 
 #include "game_engine.h"
 
-static void		set_zero_byts(void *dest, int len)
+void	set_zero_byts(void *dest, int len)
 {
 	unsigned char	*cdest;
 
@@ -24,7 +24,7 @@ static void		set_zero_byts(void *dest, int len)
 	}
 }
 
-void			*init_bitmap(t_game *game)
+void	*init_bitmap(t_game *game)
 {
 	static char		bitmap[54];
 

@@ -14,10 +14,10 @@
 #include "string_array_utils.h"
 #include "libft.h"
 
-static t_vector find_player_pos(t_player *player, char **map)
+static t_vector	find_player_pos(t_player *player, char **map)
 {
 	int			map_lines;
-	t_vector 	vector;
+	t_vector	vector;
 
 	vector.x = 0;
 	vector.y = 0;
@@ -39,7 +39,7 @@ static t_vector find_player_pos(t_player *player, char **map)
 	return (vector);
 }
 
-static void init_ns_view(t_player *player)
+static void		init_ns_view(t_player *player)
 {
 	if (player->start_view == 'N')
 	{
@@ -57,7 +57,7 @@ static void init_ns_view(t_player *player)
 	}
 }
 
-static void init_we_view(t_player *player)
+static void		init_we_view(t_player *player)
 {
 	if (player->start_view == 'W')
 	{
@@ -74,7 +74,8 @@ static void init_we_view(t_player *player)
 		player->plane.y = -0.66;
 	}
 }
-void init_player(t_player *player, t_config config)
+
+void			init_player(t_player *player, t_config config)
 {
 	t_vector vector;
 
