@@ -3,3 +3,6 @@ This project is inspired by the world-famous eponymous 90’s game, which was th
 
 ## Build
 > make all
+
+### Screenshot
+![alt-текст](https://github.com/EnapsTer/RewritenWolfenstein3d/blob/main/images/screenshot.png "screenshot")
